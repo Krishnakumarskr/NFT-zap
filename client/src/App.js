@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import {useState} from 'react';
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
@@ -13,29 +13,53 @@ const App = () => {
     const [globalStates, setGlobalStates] = useState(
         {
             web3: null,
-            account: null,
+            accounts: null,
             signUp: false,
             instance: null
         }
     );
-    console.log(globalStates);
 
-    // useEffect(() => {
-    //     const data = localStorage.getItem('states');
-    //     if(data) {
-    //         setGlobalStates(JSON.parse(data));
-    //     }
-    // }, []);
 
-    // useEffect(() => {
-    //     const data = JSON.stringify(globalStates);
-    //     localStorage.setItem('states', data);
-    // });
+    // Avoid cyclic reference
+    const getCircularReplacer = () => {
+        const seen = new WeakSet();
+        return (key, value) => {
+          if (typeof value === "object" && value !== null) {
+            if (seen.has(value)) {
+              return;
+            }
+            seen.add(value);
+          }
+          return value;
+        };
+      };
+      
+      
+      //Retrive from local storage
+      useEffect(() => {
+        const json = localStorage.getItem("states");
+        //console.log("JSON", json)
+        const logged = JSON.parse(json);
+        if (logged) {
+          setGlobalStates(logged);
+        }
+      }, []);
+
+    //Add to local storage
+    useEffect(() => {
+            const json = JSON.stringify(globalStates, getCircularReplacer());
+            localStorage.setItem('states', json)
+            //console.log("Data",json)
+         
+     },[globalStates]);
+
+     
 
     const accountSignUp = async () => {
         console.log('calling signup')
         try {
             // Get network provider and web3 instance.
+            
             const web3 = await getWeb3();
 
             // Use web3 to get the user's accounts.
@@ -49,6 +73,7 @@ const App = () => {
                 deployedNetwork && deployedNetwork.address,
             );
 
+            
             // Set web3, accounts, signup to the global state.
             setGlobalStates({web3, accounts, signUp: true, instance});
 
