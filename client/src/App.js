@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import {useState} from 'react';
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
@@ -19,7 +19,6 @@ const App = () => {
         }
     );
 
-
     // Avoid cyclic reference
     const getCircularReplacer = () => {
         const seen = new WeakSet();
@@ -36,24 +35,20 @@ const App = () => {
       
       
       //Retrive from local storage
-      useEffect(() => {
+    useEffect(() => {
         const json = localStorage.getItem("states");
-        //console.log("JSON", json)
         const logged = JSON.parse(json);
         if (logged) {
           setGlobalStates(logged);
         }
-      }, []);
+    }, []);
 
     //Add to local storage
     useEffect(() => {
-            const json = JSON.stringify(globalStates, getCircularReplacer());
-            localStorage.setItem('states', json)
-            //console.log("Data",json)
-         
-     },[globalStates]);
+        const json = JSON.stringify(globalStates, getCircularReplacer());
+        localStorage.setItem('states', json);
+    }, [globalStates]);
 
-     
 
     const accountSignUp = async () => {
         console.log('calling signup')
