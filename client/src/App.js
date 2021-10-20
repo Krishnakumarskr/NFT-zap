@@ -66,14 +66,14 @@ const App = () => {
             // const deployedNetwork = SimpleStorageContract.networks[networkId];
             const instance = new web3.eth.Contract(
                 AtomicSwapContract.abi,
-                '0x2C42919c1fcA38bdad17F7715F871a78E06c7ee4'
+                SwapContractAddress
                 // SimpleStorageContract.abi,
                 // deployedNetwork && deployedNetwork.address,
             );
 
             const nftInstance = new web3.eth.Contract(
                 nftAbi,
-                '0x2C42919c1fcA38bdad17F7715F871a78E06c7ee4'
+                SwapContractAddress
             );
 
             // Set web3, accounts, signup to the global state.

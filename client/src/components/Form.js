@@ -4,7 +4,7 @@ import nftAbi from "../abis/ERC721";
 
 const Form = ({swapAddress}) => {
     const globalContext = useContext(AppContext);
-    
+    //const account = globalContext.accounts[0];
     const getContractFunc = async () => {
         const account = globalContext.accounts[0];
         const data = {
@@ -30,10 +30,27 @@ const Form = ({swapAddress}) => {
         console.log(result);
 
     }
+
+
+    const withdraw = async () => {
+       // console.log(globalContext.instances.contract);
+        const exchangeId = '0x31ce1d226bca24cb284cac2f6afb6ef5df985e2a60b78028643002da53471513';
+        const account = globalContext.accounts[0];
+        console.log(globalContext.instances.contract);
+        const { getContract } = globalContext.instances.contract.methods;
+        console.log(await getContract(exchangeId).call({from: account}));
+    }
     return (
-        <button onClick={getContractFunc}>
-            Get contract
+        <div>
+            <button onClick={getContractFunc}>
+                Get contract
+            </button>
+
+        <button onClick={withdraw}>
+            Withdraw
         </button>
+        </div>
+        
     );
 }
 
