@@ -9,10 +9,10 @@ const Navbar = ({signUp}) => {
                 <a className="navbar-brand" href="/">NFT ZAP</a>
                 <div className="navbar navbar-collapse">
                     <div className="nav navbar-nav ms-auto ml-auto">
-                        { !globalContext.signUp &&  
+                        { !globalContext.accounts &&  
                             <li><button className='btn btn-primary' onClick={signUp}>Sign Up</button></li> 
                         }
-                        { globalContext.signUp && 
+                        { globalContext.accounts && 
                             <li>Account: {globalContext.accounts[0]}</li>
                         }
                     </div>
