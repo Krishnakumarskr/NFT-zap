@@ -6,7 +6,7 @@ import getWeb3 from "./getWeb3";
 import Navbar from './components/Navbar';
 import AppContext from './components/AppContext';
 import Form from './components/Form';
-import nftAbi from "./abis/ERC721";
+//import nftAbi from "./abis/ERC721";
 
 import "./App.css";
 
@@ -15,10 +15,11 @@ const App = () => {
     const [accounts, setAccounts] = useState(null);
     const [instances, setInstances] = useState({
         web3: null,
-        contract: null
+        contract: null,
+        nft: null
     });
 
-    const SwapContractAddress = '0x09AfBCE734A23C1eA5B780B3339eb9308eccBD81';
+    const SwapContractAddress = '0x2620b1004A895A6a5E7d8FdD397Fa0A1c7e857c0';
       
     //Retrive from local storage
     useEffect(() => {
@@ -71,22 +72,22 @@ const App = () => {
                 // deployedNetwork && deployedNetwork.address,
             );
 
-            const nftInstance = new web3.eth.Contract(
-                nftAbi,
-                SwapContractAddress
-            );
+            // const nftInstance = new web3.eth.Contract(
+            //     nftAbi,
+            //     SwapContractAddress
+            // );
 
             // Set web3, accounts, signup to the global state.
             // setGlobalStates({web3, accounts, signUp: true, instance});
             setAccounts(accounts);
-            setInstances({web3, contract:instance, nft: nftInstance});
+            setInstances({web3, contract:instance});
 
             // console.log(instance);
             // console.log(web3);
 
         } catch (error) {
             // Catch any errors for any of the above operations.
-            alert(
+            alert( 
                 `Failed to load web3, accounts, or contract. Check console for details.`,
             );
             console.error(error);
