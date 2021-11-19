@@ -1,54 +1,56 @@
 import React, { useEffect } from "react";
 import {useState} from 'react';
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
+import AtomicSwapContract from "./contracts/HashedTimelockERC721.json";
+//import SimpleStorageContract from './contracts/SimpleStorage.json';
 import getWeb3 from "./getWeb3";
 import Navbar from './components/Navbar';
 import AppContext from './components/AppContext';
+import Form from './components/Form';
+//import nftAbi from "./abis/ERC721";
 
 import "./App.css";
 
-
 const App = () => {
 
-    const [globalStates, setGlobalStates] = useState(
-        {
-            web3: null,
-            accounts: null,
-            signUp: false,
-            instance: null
-        }
-    );
+    const [accounts, setAccounts] = useState(null);
+    const [instances, setInstances] = useState({
+        web3: null,
+        contract: null,
+        nft: null
+    });
 
-    // Avoid cyclic reference
-    const getCircularReplacer = () => {
-        const seen = new WeakSet();
-        return (key, value) => {
-          if (typeof value === "object" && value !== null) {
-            if (seen.has(value)) {
-              return;
-            }
-            seen.add(value);
-          }
-          return value;
-        };
-      };
+    const SwapContractAddress = '0x2620b1004A895A6a5E7d8FdD397Fa0A1c7e857c0';
       
-      
-      //Retrive from local storage
+    //Retrive from local storage
     useEffect(() => {
-        const json = localStorage.getItem("states");
-        const logged = JSON.parse(json);
-        if (logged) {
-          setGlobalStates(logged);
+        const json = localStorage.getItem("accounts");
+        const accounts = JSON.parse(json);
+        if (accounts !== null) {
+            setAccounts(accounts);
+            (async () => {
+                const web3 = await getWeb3();
+                const instance = new web3.eth.Contract(
+                    AtomicSwapContract.abi,
+                    SwapContractAddress
+                );
+                
+                setInstances({web3, contract:instance});
+            })();
         }
     }, []);
 
     //Add to local storage
     useEffect(() => {
-        const json = JSON.stringify(globalStates, getCircularReplacer());
-        localStorage.setItem('states', json);
-    }, [globalStates]);
+        const json = JSON.stringify(accounts);
+        localStorage.setItem('accounts', json);
+    }, [accounts]);
 
+    const globalStates = {
+        accounts,
+        instances
+    }
+
+    console.log(globalStates);
 
     const accountSignUp = async () => {
         console.log('calling signup')
@@ -61,20 +63,31 @@ const App = () => {
             const accounts = await web3.eth.getAccounts();
 
             // Get the contract instance.
-            const networkId = await web3.eth.net.getId();
-            const deployedNetwork = SimpleStorageContract.networks[networkId];
+            // const networkId = await web3.eth.net.getId();
+            // const deployedNetwork = SimpleStorageContract.networks[networkId];
             const instance = new web3.eth.Contract(
-                SimpleStorageContract.abi,
-                deployedNetwork && deployedNetwork.address,
+                AtomicSwapContract.abi,
+                SwapContractAddress
+                // SimpleStorageContract.abi,
+                // deployedNetwork && deployedNetwork.address,
             );
 
-            
+            // const nftInstance = new web3.eth.Contract(
+            //     nftAbi,
+            //     SwapContractAddress
+            // );
+
             // Set web3, accounts, signup to the global state.
-            setGlobalStates({web3, accounts, signUp: true, instance});
+            // setGlobalStates({web3, accounts, signUp: true, instance});
+            setAccounts(accounts);
+            setInstances({web3, contract:instance});
+
+            // console.log(instance);
+            // console.log(web3);
 
         } catch (error) {
             // Catch any errors for any of the above operations.
-            alert(
+            alert( 
                 `Failed to load web3, accounts, or contract. Check console for details.`,
             );
             console.error(error);
@@ -85,6 +98,7 @@ const App = () => {
        <AppContext.Provider value={globalStates}>
             <div className="App">
                 <Navbar signUp={accountSignUp} />
+                <Form swapAddress={SwapContractAddress}/>
             </div>
         </AppContext.Provider>
     );
