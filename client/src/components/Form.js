@@ -18,6 +18,7 @@ const Form = ({swapAddress}) => {
 
     const [tradeId, setTradeId] = useState('');
     const [hash, setHash] = useState('');
+    const [withdrawTokenId, setWithdrawTokenId] = useState('');
 
     const formData = {
         receiver,
@@ -30,7 +31,8 @@ const Form = ({swapAddress}) => {
 
     const withdrawData = {
         tradeId,
-        hash
+        hash,
+        withdrawTokenId
     }
 
    
@@ -93,7 +95,7 @@ const Form = ({swapAddress}) => {
 
         console.log(contractData);
 
-        const res = await  nftInstance.methods.approve(swapAddress, 193).send({from: account});
+        const res = await  nftInstance.methods.approve(swapAddress, parseInt(withdrawData.withdrawTokenId)).send({from: account});
 
         console.log(res);
         const { withdraw } = globalContext.instances.contract.methods;
@@ -158,6 +160,10 @@ const Form = ({swapAddress}) => {
                                 <div className="form-group">
                                     <label htmlFor="trade ID">Trade ID</label>
                                     <input type="text" className="form-control" id="tradeId" placeholder="Trade ID" onChange={(e) => {setTradeId(e.target.value)}}/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="trade ID">Token ID</label>
+                                    <input type="text" className="form-control" id="withdrawTokenId" placeholder="Token ID" onChange={(e) => {setWithdrawTokenId(e.target.value)}}/>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="Hash">Hash</label>
