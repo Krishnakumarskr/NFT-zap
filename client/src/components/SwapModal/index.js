@@ -82,7 +82,7 @@ const SwapModal = (props) => {
                 
                 <Row>
                 {
-                    props.nftData.map((data, i) => {
+                    props.nftData ? props.nftData.map((data, i) => {
                         return(
                             <div className="col col-md-3 nft-col" key={i}>
                                 <div className="nft-card" onClick={() => selectNFT(data)}>
@@ -91,7 +91,7 @@ const SwapModal = (props) => {
                                 </div>
                             </div>
                         )
-                    })
+                    }) : ''
                 }
                 </Row>
                 </Container>

@@ -1,16 +1,22 @@
 
 import React from "react";
+import { useSelector } from "react-redux";
 import SwapModal from "../SwapModal";
+import {filterAPIData} from '../common';
 
 
 const Grid = (props) => {
     const [modalShow, setModalShow] = React.useState(false);
     const [selectedNFT, setSelectedNFT] = React.useState(null);
+    const [myNftData, setMyNftdata] = React.useState(null);
+    const wallet = useSelector((state) => state.WalletConnect);
 
-    const openModal = (data) => {
+    const openModal = async(data) => {
         if(props.swapIt) {
+            const {address} = wallet;
             setModalShow(true);
             setSelectedNFT(data);
+            await filterAPIData(address, wallet, setMyNftdata);
         }
     }
 
@@ -40,7 +46,7 @@ const Grid = (props) => {
                 nft={selectedNFT}
                 onHide={() => setModalShow(false)}
                 fullscreen = {true}
-                nftData = {props.gridData}
+                nftData = {myNftData}
                 //openSelectNFTModal={openSelectNFTModal}
                 
             />

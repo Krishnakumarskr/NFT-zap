@@ -12,7 +12,7 @@ const Collection = () => {
   
     const searchAndRender = async () => {
         console.log(searchAddress);
-        setNftData(await filterAPIData(searchAddress, wallet, setNftData));
+        await filterAPIData(searchAddress, wallet, setNftData);
     }
 
     return (
