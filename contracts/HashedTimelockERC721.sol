@@ -1,12 +1,13 @@
+// SPDX-License-Identifier: MIT
 pragma solidity 0.8.0; 
 
-  import "../node_modules/openzeppelin-solidity/contracts/utils/Context.sol";
-  import "../node_modules/openzeppelin-solidity/contracts/token/ERC721/extensions/ERC721Burnable.sol";
-  import "../node_modules/openzeppelin-solidity/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-  import "../node_modules/openzeppelin-solidity/contracts/access/Ownable.sol";
-  import "../node_modules/openzeppelin-solidity/contracts/utils/Counters.sol";
-  import "../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
-  import "../node_modules/openzeppelin-solidity/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+  import "@openzeppelin/contracts/utils/Context.sol";
+  import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
+  import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+  import "@openzeppelin/contracts/access/Ownable.sol";
+  import "@openzeppelin/contracts/utils/Counters.sol";
+  import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+  import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
 contract HashedTimelockERC721 {
 
@@ -66,7 +67,7 @@ contract HashedTimelockERC721 {
     uint256 verificatonfees;
     uint256 ExchangeFees = 0.00069 ether;
     mapping(address => bool) public whiteListedAddress;
-    mapping (uint256 => LockContract) contracts;
+    mapping (uint256 => LockContract) public contracts;
     mapping(address => uint256[]) Trades;
     
     /**
@@ -204,6 +205,8 @@ contract HashedTimelockERC721 {
             address receiver,
             address tokenContract,
             uint256 tokenId,
+            address requestedContract,
+            uint256 requestedId,
             string memory hashlock,
             bool withdrawn,
             bool refunded,
@@ -211,13 +214,15 @@ contract HashedTimelockERC721 {
         )
     {
         if (haveContract(_contractId) == false)
-             return (address(0), address(0), address(0), 0, "",false, false, "");
+             return (address(0), address(0), address(0), 0, address(0), 0, "",false, false, "");
         LockContract storage c = contracts[_contractId];
         return (
             c.Sender,
             c.receiver,
             c.tokenContract,
             c.tokenId,
+            c.requestedcontract,
+            c.requestedid,
             c.hashlock,
             c.withdrawn,
             c.refunded,
@@ -243,7 +248,7 @@ contract HashedTimelockERC721 {
     }
     
     function AllTrades()public view returns(uint256){
-        return contractId;
+        return contractId - 1;
     }
     
     function Owner(address _CollectibleAddress)internal view returns(address){
