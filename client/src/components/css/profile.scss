@@ -1,0 +1,33 @@
+.nft-img {
+    width: 100%;
+}
+
+.main-layout {
+    margin-top: 40px;
+}
+
+.nft-col {
+    margin-bottom: 30px;
+
+    .nft-card {
+        &:hover {
+            transform: translateY(-10px);
+        }
+    }
+}
+
+.nft-card {
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px 0 rgba(222, 228, 237, 0.7);
+    cursor: pointer;
+    transition: 0.5s;
+
+    img {
+        border-radius: 8px;
+    }
+
+    p {
+        margin-top: 10px;
+    }
+}

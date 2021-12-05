@@ -1,0 +1,32 @@
+.modal-nft {
+    max-width: 270px;
+    margin: 0 auto;
+
+}
+
+// .modal-width {
+//     max-width: 60% !important;
+// }
+
+.selection-container {
+    position: relative;
+}
+
+.nft-sticky-row {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 999;
+}
+
+.modal-body {
+    padding-top: 0 !important;
+}
+
+.divider {
+    margin-top: 15px !important;
+}
+
+.zap-button {
+    width: 20%;
+}

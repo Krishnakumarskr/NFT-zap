@@ -39,14 +39,6 @@ const Form = ({swapAddress}) => {
 
     const getContractFunc = async () => {
         const account = globalContext.accounts[0];
-        // const data = {
-        //     receiver: '0x5cc51e3550e12571146962F69b78701925c6B174',
-        //     hashLock: '0x37a57542613fc4088aefd44a8e4378c8cfae4e5206',
-        //     tokenContract: '0x121c84a9b62b4a5667bc57db3d26cc1c85eb550c',
-        //     tokenId: 1,
-        //     requestedContract: '0x121c84a9b62b4a5667bc57db3d26cc1c85eb550c',
-        //     requestedId: 2
-        // }
         const { newContract } = globalContext.instances.contract.methods;
         // console.log(newContract);
         const nftInstance = new globalContext.instances.web3.eth.Contract(
@@ -56,8 +48,6 @@ const Form = ({swapAddress}) => {
         const res = await nftInstance.methods.approve(swapAddress, formData.tokenId).send({from: account});
 
         console.log(res);
-        //const { approve } = globalContext.instances.contract.methods;
-        //approve('0xb4e912C0ED3B356af88Ee2587250875d4676Ca02', '0')
         const amount = globalContext.instances.web3.utils.toWei('0.00069', 'ether');
         const result = await newContract(formData.receiver, formData.hashLock, formData.tokenContract, formData.tokenId, formData.requestedContract, formData.requestedId).send({from: account, value: amount});
         console.log(result);
@@ -78,8 +68,6 @@ const Form = ({swapAddress}) => {
         console.log(formData);
         getContractFunc();
     }
-
-
 
     const withdrawAsset = async () => {
        // console.log(globalContext.instances.contract);
