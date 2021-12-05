@@ -1,19 +1,19 @@
 import axios from 'axios';
-import chainData from '../chaindata/data.json';
+//import chainData from '../chaindata/data.json';
 import ERC721 from '../abis/ERC721.json';
 
 export const getAPIdata = async (address) => {
-    // const result = await axios.get('https://api-rinkeby.etherscan.io/api', {
-    //     params: {
-    //         module: 'account',
-    //         action: 'tokennfttx',
-    //         address: address,
-    //         apikey: 'XX77XCKEUGCI9QD4UQFFGXMBECQ992R887'
-    //     }
-    // });
-    // return result.data.result;
+    const result = await axios.get('https://api-rinkeby.etherscan.io/api', {
+        params: {
+            module: 'account',
+            action: 'tokennfttx',
+            address: address,
+            apikey: 'XX77XCKEUGCI9QD4UQFFGXMBECQ992R887'
+        }
+    });
+    return result.data.result;
 
-    return chainData.result;
+    //return chainData.result;
 
     //   const a = document.createElement("a");
     //     a.href = URL.createObjectURL(new Blob([JSON.stringify(result.data, null, 2)], {
