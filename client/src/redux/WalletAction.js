@@ -54,7 +54,7 @@ export const connectWallet = () => {
       });
 
       const provider = await web3Modal.connect();
-      const ZAPcontractAddress = "0xc99A68C45b93a8e021A95463627A1F9f725E9a43";
+      const ZAPcontractAddress = "0x27a2569cD335AC10e3D34dA67f1094ca0632F6D9";
 
       await subscribeProvider(provider);
 
