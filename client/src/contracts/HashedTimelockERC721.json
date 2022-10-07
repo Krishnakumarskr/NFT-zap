@@ -1,6 +1,6 @@
 {
   "compiler": {
-    "version": "0.8.2+commit.661d1103"
+    "version": "0.8.7+commit.e28d00a7"
   },
   "language": "Solidity",
   "output": {
@@ -444,7 +444,7 @@
     "compilationTarget": {
       "contracts/HashedTimelockERC721.sol": "HashedTimelockERC721"
     },
-    "evmVersion": "istanbul",
+    "evmVersion": "london",
     "libraries": {},
     "metadata": {
       "bytecodeHash": "ipfs"
@@ -486,6 +486,38 @@
       "urls": [
         "bzz-raw://6e75cf83beb757b8855791088546b8337e9d4684e169400c20d44a515353b708",
         "dweb:/ipfs/QmYvPafLfoquiDMEj7CKHtvbgHu7TJNPSVPSCjrtjV8HjV"
+      ]
+    },
+    "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol": {
+      "keccak256": "0xfa6873a010382f62e9ffe4592b305ef6e60f55502c95ed0ffa51eb10b5200d45",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://f86000c6885fb5a0a8bd5cd2595d302f0b4038411d66b85b07fa10590f844c2e",
+        "dweb:/ipfs/QmeZuXaxdr7NH2wUAprx3BcLTke9RtcptAZgRKfQVHops5"
+      ]
+    },
+    "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol": {
+      "keccak256": "0x0a79511df8151b10b0a0004d6a76ad956582d32824af4c0f4886bdbdfe5746e5",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://afbedcf17f31db719e6fdc56caa8f458799c5fa2eb94cb1e94ef18f89af85768",
+        "dweb:/ipfs/QmVmqRdBfbgYThpZSoAJ5o9mnAMjx8mCHHjv3Rh8cQAAg3"
+      ]
+    },
+    "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol": {
+      "keccak256": "0x5c3501c1b70fcfc64417e9da5cc6a3597191baa354781e508e1e14cc0e50a038",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://899c87a849a94c848818d0afede6961d2c87665af1dd23a5c983e78981a65691",
+        "dweb:/ipfs/QmUeFDffQRDmX87FX3MRxN3bmpUxDTWpWLwPJzeAJ3yF6H"
+      ]
+    },
+    "@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol": {
+      "keccak256": "0xd1556954440b31c97a142c6ba07d5cade45f96fafd52091d33a14ebe365aecbf",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://26fef835622b46a5ba08b3ef6b46a22e94b5f285d0f0fb66b703bd30217d2c34",
+        "dweb:/ipfs/QmZ548qdwfL1qF7aXz3xh1GCdTiST81kGGuKRqVUfYmPZR"
       ]
     },
     "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
@@ -545,11 +577,11 @@
       ]
     },
     "contracts/HashedTimelockERC721.sol": {
-      "keccak256": "0x43702a98f8b7c6e5c93be96c9d17cdba65e5cdbe8af36f0b6cde3601df8582ac",
+      "keccak256": "0x215a9a1494434c4511477c51fc39799f7430dc50ddeffbb53d8f3bf126759228",
       "license": "MIT",
       "urls": [
-        "bzz-raw://f4fbd31074603a04c0519abaa45f82ee18824e54c51130a9c9c17277170b9677",
-        "dweb:/ipfs/QmRaTujmoVWnmkiYRv5MXoXyq3pCBZXbyDZ6FZr9LZcQaT"
+        "bzz-raw://903408ce5c2540d06c21ade6e0676d3004d47166d8449b8f03ceb4d4d15bdeaa",
+        "dweb:/ipfs/QmWEfZfoK97GSU6gVSyTXT31TemNzTc9fJyFWYhwBJkHEY"
       ]
     }
   },
