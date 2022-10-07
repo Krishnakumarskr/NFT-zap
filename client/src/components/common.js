@@ -3,7 +3,7 @@ import axios from "axios";
 import ERC721 from "../abis/ERC721.json";
 
 export const getAPIdata = async (address) => {
-  const result = await axios.get("https://api-testnet.polygonscan.com/", {
+  const result = await axios.get("https://api-testnet.polygonscan.com/api", {
     params: {
       module: "account",
       action: "tokennfttx",
