@@ -3,12 +3,12 @@ import axios from "axios";
 import ERC721 from "../abis/ERC721.json";
 
 export const getAPIdata = async (address) => {
-  const result = await axios.get("https://api-testnet.polygonscan.com/api", {
+  const result = await axios.get("https://api-goerli.etherscan.io/api", {
     params: {
       module: "account",
       action: "tokennfttx",
       address: address,
-      apikey: "J15N8IJMA3EFV1NIQY8XFA1IRTWYG18C5G",
+      apikey: "TTFPA7F4CAMSNK5GUJJC5MRVU2HPI51J9P",
     },
   });
   return result.data.result;
